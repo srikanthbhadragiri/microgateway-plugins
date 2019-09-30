@@ -5,7 +5,7 @@
 
 
 var async = require('async');
-var Quota = require('volos-quota-apigee');
+var Quota = require('volos-quota-redis');
 var debugTerminal = require('debug')('gateway:quota');
 var url = require('url');
 const util = require('util');
