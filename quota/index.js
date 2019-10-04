@@ -5,7 +5,8 @@
 
 
 var async = require('async');
-var Quota = require('volos-quota-redis');
+var QuotaRedis = require('volos-quota-redis');
+var Quota = require('volos-quota-apigee');
 var debugTerminal = require('debug')('gateway:quota');
 var url = require('url');
 const util = require('util');
@@ -68,7 +69,10 @@ module.exports.init = function(config, logger /*, stats */) {
                 return acc;
             }, basePaths);
         }
-
+        if (config[productName].useRedis === true ) {
+            debug('using redis quota');
+            Quota = QuotaRedis;
+        }
         prodObj.basePaths = basePaths;
         prodsObj[productName] = prodObj;
 
